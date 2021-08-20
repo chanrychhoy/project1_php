@@ -3,4 +3,7 @@
     require_once('partial/navbar.php');
     
 ?>
-<div>hello login</div>
+<div class="loginImage">
+    <img src="https://aegisbiztech.com/wp-content/uploads/2016/02/BGproducts.jpg" alt="" width="100%" height="250">
+</div>
+
