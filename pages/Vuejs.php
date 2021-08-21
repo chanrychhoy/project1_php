@@ -47,7 +47,7 @@ require_once('partial/navbar.php');
             <div class=" col-3">
                 <div class="card mb-2 shadow-lg  bg-white rounded " style="width: 17rem; ">
                     <div class=" border shadow-sm  bg-white rounded">
-                        <img class="card-img-top " src="<?= $row['img'] ?>" alt="image ">
+                        <img class="card-img-top " src="assets/images/<?= $row['img'] ?>" alt="image ">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?= $row['title'] ?></h5>

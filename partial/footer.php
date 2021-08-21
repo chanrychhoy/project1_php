@@ -1,6 +1,6 @@
 <!-- Footer links -->
 <!-- Grid row -->
-<div class="row d-flex align-items-center bg-info">
+<div class="row d-flex align-items-center bg-secondary">
     <!-- Grid column -->
     <div class="col-md-7 col-lg-8">
         <!--Copyright-->

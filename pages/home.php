@@ -27,15 +27,15 @@ require_once('partial/navbar.php');
 <!-- The card each post the lesson -->
 <div class="allcard pt-3 row">
     <?php
-    require_once('database/database.php');
-    $lessons = "";
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // search
-        $lessons = search($_POST);
-    } else {
-        $lessons = all_lesson();
-    }
-    foreach ($lessons as $lesson) :
+        require_once('database/database.php');
+        $lessons = "";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // search
+            $lessons = search($_POST);
+        } else {
+            $lessons = getPost();
+        }
+        foreach ($lessons as $lesson) :
     ?>
         <div class=" col-3">
             <div class="card mb-2 ml-4 shadow-lg  bg-white rounded " style="width: 17rem; ">
@@ -43,21 +43,23 @@ require_once('partial/navbar.php');
                     <a href="readMore/detail.php?postID=<?= $lesson['lesson_id'] ?>">
                         <h5 class="card-title"><?= $lesson['title'] ?></h5>
                     </a>
-
                 </div>
             </div>
-
-        </div>
-        
-        <!-- <div class="d-flex p-2">
-            <a href="readMore/detail.php?postID=<?= $lesson['lesson_id'] ?>">
-                <form class="form-inline">
-                    <button class="btn btn-sm btn-outline-secondary" type="button"><?= $lesson['title'] ?></button>
-                </form>
-            </a>
-        </div> -->
+        </div>  
     <?php endforeach; ?>
-    </div>
-
-
 </div>
+<!--  page paginetion -->
+<div class="d-flex justify-content-center">
+    <ul class="d-flex">
+        <?php
+            $pagePagi = getTotalPage();
+            for($i = 1; $i <=  $pagePagi+1; $i++):
+        ?>
+            <li class="page-item list-unstyled"><a class="page-link" href="?page_show_pagi=<?= $i ?>"><?= $i ?> </a></li>
+        <?php endfor; ?>
+    </ul>
+</div>
+
+
+
+

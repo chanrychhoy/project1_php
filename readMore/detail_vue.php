@@ -18,7 +18,7 @@
         <div class="card mb-2 shadow-lg  bg-white rounded " >
             <h1 class="card-title ml-3"><?= $row['title'] ?></h1>
             <div class="Uploadimage d-flex">
-                <img class="card-img-top ml-3" src="<?= $row['img'] ?>" alt="image" style="width: 18rem; ">
+                <img class="card-img-top ml-3" src="../assets/images/<?= $row['img'] ?>" alt="image" style="width: 18rem; ">
                 <div class="card-body">
                 <p class="card-text"><?= $row['description'] ?></p>
        

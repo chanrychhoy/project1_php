@@ -7,7 +7,7 @@ require_once('../partial/header.php');
     <div class="d-flex justify-content-end pb-2">
         <button class="btn btn-info" onclick="window.history.back();">&#8592; Back</button>
     </div>
-    <form action="create_vuejs_model.php" method="post" class="p-5 bg-secondary rounded ">
+    <form action="create_vuejs_model.php" method="post" class="p-5 bg-secondary rounded " enctype="multipart/form-data">
         <div class="form-group">
             <input type="text" class="form-control" placeholder="title" name="title">
         </div>

@@ -18,7 +18,7 @@
         <div class="card-body">
             <div class="d-flex ">
                 <div class="card-image mr-3 border shadow-sm  bg-white rounded">
-                    <img class="img-fluid" width="200" height="200" src="<?= $list['img'] ?>" alt="image">
+                    <img class="img-fluid" width="200" height="200" src="../assets/images/<?= $list['img'] ?>" alt="image">
                 </div>
                 <div class="info">
                     <strong class="display-title"><?= $list['title'] ?></strong>

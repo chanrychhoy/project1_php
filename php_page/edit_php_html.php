@@ -9,7 +9,7 @@ require_once('../partial/header.php');
         $php_lessons = selectOnelesson($phpId);
         foreach ($php_lessons as $php_lesson) :
     ?>
-        <form action="edit_php_model.php" method="post">
+        <form action="edit_php_model.php" method="post" enctype="multipart/form-data">
             <input type="hidden" value="<?= $php_lesson['lesson_id'] ?>" name="lesson_id">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="title" name="title" value="<?= $php_lesson['title'] ?>">

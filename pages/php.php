@@ -49,8 +49,8 @@ require_once('partial/navbar.php');
         <div class="card m-2 shadow-lg  bg-white rounded">
             <div class="card-body">
                 <div class="d-flex ">
-                    <div class="card-image mr-3 border shadow-sm  bg-white rounded">
-                        <img class="img-fluid" width="200" height="200" src="<?= $list['img'] ?>" alt="image">
+                    <div class="card-image mr-3 border shadow-sm  bg-white rounded ">
+                        <img width="200" height="200"  src="assets/images/<?=$list['img'] ?>" alt="image" class="img-fluid">
 
                     </div>
                     <div class="info">
