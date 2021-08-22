@@ -57,9 +57,8 @@
         $imageName=$_FILES['img']['name']; 
         $imageTmp_name=$_FILES['img']['tmp_name'];
         $imagSize=$_FILES['img']['size'];
-        if ($imagSize > 525000){
-            header("Location: http://localhost:8080/project1_php/php_page/create_php_html.php");  
-        }else{
+        
+        if($imagSize< 525000){
             $extension= pathinfo($imageName, PATHINFO_EXTENSION);
             $extensionLocal = strtolower($extension);
             $allowExtension = array('jpg', 'jpeg', 'png');
@@ -70,8 +69,11 @@
                 db()->query("UPDATE lesson SET title='$title',description='$description',img='$newImageName',cate_id='$cate_id' WHERE lesson_id=$lesson_id ");
                 header("Location: http://localhost:8080/project1_php/?page=php");
             }else{
+                $newImageName = uniqid('php-', true) . '.' . $extensionLocal;
+                $folderImage = '../assets/images/'. $newImageName;
+                move_uploaded_file($imageTmp_name, $folderImage);
+                db()->query("UPDATE lesson SET title='$title',description='$description',img='$newImageName',cate_id='$cate_id' WHERE lesson_id=$lesson_id ");
                 header("Location: http://localhost:8080/project1_php/?page=php");
-                
             }
         
         }   
@@ -97,8 +99,9 @@
         $imageName=$_FILES['img']['name']; 
         $imageTmp_name=$_FILES['img']['tmp_name'];
         $imagSize=$_FILES['img']['size'];
-
-        if  ($imagSize <525000){
+        if ($imagSize > 525000){
+            header("Location: http://localhost:8080/project1_php/Vuejs_page/create_vuejs_html.php");  
+        }else{
             $extension= pathinfo($imageName, PATHINFO_EXTENSION);
             $extensionLocal = strtolower($extension);
             $allowExtension = array('jpg', 'jpeg', 'png');
@@ -130,20 +133,25 @@
         $description=$value['desc'];
         $cate_id="2";
 
-        $imageName=$_FILES['img']['name']; 
+        $imageName=$_FILES['img']['name'];
         $imageTmp_name=$_FILES['img']['tmp_name'];
         $imagSize=$_FILES['img']['size'];
         if($imagSize < 525000){
             $extension= pathinfo($imageName, PATHINFO_EXTENSION);
             $extensionLocal = strtolower($extension);
             $allowExtension = array('jpg', 'jpeg', 'png');
-            if(in_array($extensionLocal, $allowExtension) && $title!="" && $description!=""){
+            if(in_array($extensionLocal, $allowExtension)){
+                $newImageName = uniqid('php-', true) . '.' . $extensionLocal;
+                $folderImage = '../assets/images/'. $newImageName;
+                move_uploaded_file($imageTmp_name, $folderImage);
+                db()->query("UPDATE lesson SET title='$title',description='$description',img ='$newImageName',cate_id='$cate_id' WHERE lesson_id=$lesson_id ");
+                header("Location: http://localhost:8080/project1_php/?page=vuejs");
+            
+            }else{
                 $newImageName = uniqid('vue-', true) . '.' . $extensionLocal;
                 $folderImage = '../assets/images/'. $newImageName;
                 move_uploaded_file($imageTmp_name, $folderImage);
                 db()->query("UPDATE lesson SET title='$title',description='$description',img='$newImageName',cate_id='$cate_id' WHERE lesson_id=$lesson_id ");
-                header("Location: http://localhost:8080/project1_php/?page=vuejs");
-            }else{
                 header("Location: http://localhost:8080/project1_php/?page=vuejs");
             }
         }
@@ -208,4 +216,62 @@
         $totalPage = $numRow / $results_per_page ;
         return $totalPage;
     }
+
+    // get user from database
+    function getUser(){
+        return db()->query("SELECT*FROM user order by user_id ASC");
+    }
+    // login
+    function userlogin($value){
+        $username=$value['user'];
+        $pass=$value['pass'];
+        $email=$value['email'];
+        $userInput="not_correct";
+        $dataUsers=db()->query("SELECT*FROM user order by user_id ASC");
+        foreach($dataUsers as $dataUser){
+            if ($dataUser['user_name']==$username && $dataUser['password']==$pass && $dataUser['email']==$email){
+                $userInput="correct";
+            }
+        }
+        return $userInput;
+    
+    }
+    // create user 
+    function createUser($value){
+        $user=$value['user'];
+        $email=$value['email'];
+        $password=$value['pass'];
+        $userType=$value['userType'];
+        // upload image
+        $profileName=$_FILES['file']['name']; 
+        $imageTmp_name=$_FILES['file']['tmp_name'];
+        $imageSize=$_FILES['file']['size'];
+        if ($imageSize > 525000){
+            header("Location: http://localhost:8080/project1_php/users/create_user_html.php");  
+        }else{
+            $extension= pathinfo($profileName, PATHINFO_EXTENSION);
+            $extensionLocal = strtolower($extension);
+            $allowExtension = array('jpg', 'jpeg', 'png');
+            if(in_array($extensionLocal, $allowExtension) && $user !="" && $email !="" && $password !="" && $userType !=""){
+                $newProfileName = uniqid('profile-', true) . '.' . $extensionLocal;
+                $folderImage = '../assets/images/'. $newProfileName;
+                move_uploaded_file($imageTmp_name, $folderImage);
+                db()->query("INSERT INTO user (user_name,profile,email,password,userType) VALUES('$user','$newProfileName','$email','$password','$userType')");
+                header("Location: http://localhost:8080/project1_php/users/user.php");  
+               
+            }else{
+                header("Location: http://localhost:8080/project1_php/users/create_user_html.php");  
+            }
+
+        }
+    }
+    // delete user 
+    function deleteUser($userid){
+        db()->query("DELETE FROM user WHERE user_id=$userid");
+        header("location: http://localhost:8080/project1_php/users/user.php");
+        
+    }
+
+
+
 ?>

@@ -15,7 +15,7 @@ require_once('../partial/header.php');
             <input type="text" class="form-control" placeholder="description" name="desc">
         </div>
         <div class="form-group">
-            <input type="file" id="myFile" name="img">
+            <input type="file" id="myFile" name="img" width="200" height="200">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Create</button>

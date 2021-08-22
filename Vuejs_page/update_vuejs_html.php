@@ -9,7 +9,7 @@ require_once('../partial/header.php');
         $vue_lessons = selectOnelesson_vue($vueId);
         foreach ($vue_lessons as $vue_lesson) :
     ?>
-        <form action="update_vuejs_model.php" method="post">
+        <form action="update_vuejs_model.php" method="post" enctype="multipart/form-data">
             <input type="hidden" value="<?= $vue_lesson['lesson_id'] ?>" name="lesson_id">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="title" name="title" value="<?= $vue_lesson['title'] ?>">
